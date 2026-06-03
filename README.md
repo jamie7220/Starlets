@@ -1,2 +1,0 @@
-# Starlets
-An NGO website
