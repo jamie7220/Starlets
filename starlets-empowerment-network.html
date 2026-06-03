@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Starlets Empowerment Network CBO — Empowering All, Transforming Lives. A community-based organisation dedicated to upliftment, advocacy, and sustainable change." />
+  <title>Starlets Empowerment Network CBO</title>
+
+  <!-- ============================================================
+       EXTERNAL RESOURCES
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --color-canvas:       #0D0D0D;
+      --color-surface:      #1A1A1A;
+      --color-surface-2:    #222222;
+      --color-surface-3:    #2A2A2A;
+      --color-gold:         #D4AF37;
+      --color-gold-muted:   #AA7C11;
+      --color-gold-pale:    #F0D978;
+      --color-gold-dim:     rgba(212, 175, 55, 0.12);
+      --color-gold-glow:    rgba(212, 175, 55, 0.25);
+      --color-text-primary: #F5F0E8;
+      --color-text-body:    #C8C0B0;
+      --color-text-muted:   #7A7060;
+      --color-border:       rgba(212, 175, 55, 0.18);
+      --color-border-hover: rgba(212, 175, 55, 0.45);
+      --color-glass-bg:     rgba(13, 13, 13, 0.72);
+      --color-glass-border: rgba(212, 175, 55, 0.15);
+      --font-display:       'Cinzel', Georgia, serif;
+      --font-serif:         'Lora', Georgia, serif;
+      --font-body:          'DM Sans', system-ui, sans-serif;
+      --radius-sm:          0.375rem;
+      --radius-md:          0.75rem;
+      --radius-lg:          1.25rem;
+      --radius-xl:          2rem;
+      --radius-pill:        9999px;
+      --shadow-gold:        0 0 32px rgba(212, 175, 55, 0.15);
+      --shadow-card:        0 4px 32px rgba(0, 0, 0, 0.6);
+      --shadow-float:       0 8px 40px rgba(0, 0, 0, 0.8);
+      --transition-base:    0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow:    0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      --nav-height:         4.5rem;
+      --section-pad:        clamp(5rem, 10vw, 9rem);
+      --container-max:      1200px;
+      --container-pad:      clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background-color: var(--color-canvas);
+      color: var(--color-text-body);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.55;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* Focus states — WCAG 2.1 AA */
+    :focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ============================================================
+       TYPOGRAPHY SCALE
+    ============================================================ */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      color: var(--color-text-primary);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+    }
+
+    h1 { font-size: clamp(2.2rem, 5.5vw, 4.5rem); font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); font-weight: 600; }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; }
+    h4 { font-size: 1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    p { margin-bottom: 0; }
+
+    .text-gold   { color: var(--color-gold); }
+    .text-muted  { color: var(--color-text-muted); }
+    .text-body   { color: var(--color-text-body); }
+    .text-center { text-align: center; }
+
+    /* ============================================================
+       LAYOUT UTILITIES
+    ============================================================ */
+    .container {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--container-pad);
+    }
+
+    .section {
+      padding-block: var(--section-pad);
+      position: relative;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--color-gold);
+    }
+
+    .section-heading {
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .gold-divider {
+      width: 3.5rem;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-gold), transparent);
+      margin-top: 1rem;
+    }
+
+    /* ============================================================
+       CARD / GLASS SURFACE
+    ============================================================ */
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    }
+    .card:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-gold);
+      transform: translateY(-3px);
+    }
+
+    .glass {
+      background: var(--color-glass-bg);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid var(--color-glass-border);
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background var(--transition-base), color var(--transition-base),
+                  border-color var(--transition-base), box-shadow var(--transition-base),
+                  transform var(--transition-base);
+    }
+    .btn:hover  { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--color-gold);
+      color: #0D0D0D;
+      border: 2px solid var(--color-gold);
+    }
+    .btn-primary:hover {
+      background: var(--color-gold-pale);
+      border-color: var(--color-gold-pale);
+      box-shadow: 0 0 24px var(--color-gold-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-gold);
+      border: 2px solid var(--color-gold);
+    }
+    .btn-outline:hover {
+      background: var(--color-gold-dim);
+      box-shadow: 0 0 18px var(--color-gold-glow);
+    }
+
+    /* ============================================================
+       STICKY HEADER / NAVIGATION
+    ============================================================ */
+    #site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: background var(--transition-slow), border-color var(--transition-slow);
+    }
+    #site-header.scrolled {
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    /* Brand mark */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+    }
+    .brand-emblem {
+      width: 2.75rem;
+      height: 2.75rem;
+      flex-shrink: 0;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-body);
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-sm);
+      transition: color var(--transition-base), background var(--transition-base);
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: calc(100% - 1.8rem);
+      height: 1px;
+      background: var(--color-gold);
+      transition: transform var(--transition-base);
+      transform-origin: center;
+    }
+    .nav-link:hover { color: var(--color-gold); }
+    .nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      aria-label: "Open navigation menu";
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-text-primary);
+      border-radius: 1px;
+      transition: transform var(--transition-base), opacity var(--transition-base);
+    }
+
+    /* Mobile nav */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background: rgba(13, 13, 13, 0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.5rem var(--container-pad) 2rem;
+      z-index: 999;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile .nav-link {
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+    }
+    .nav-mobile .nav-link:hover { background: var(--color-gold-dim); }
+
+    @media (max-width: 820px) {
+      .nav-links  { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ============================================================
+       SECTION 1: HERO
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: calc(var(--nav-height) + 3rem);
+      padding-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient radial glow */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      right: -10%;
+      width: 55vw;
+      height: 55vw;
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: clamp(3rem, 6vw, 7rem);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      background: var(--color-gold-dim);
+      border: 1px solid var(--color-border);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1.75rem;
+    }
+    .hero-eyebrow svg { width: 10px; height: 10px; }
+
+    .hero-title {
+      margin-bottom: 0.6rem;
+    }
+    .hero-title .org-name {
+      display: block;
+      color: var(--color-gold);
+    }
+
+    .hero-motto {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      font-style: italic;
+      color: var(--color-text-body);
+      margin-block: 1.4rem 2.25rem;
+      padding-left: 1.1rem;
+      border-left: 2px solid var(--color-gold-muted);
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Hero logo panel */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-logo-frame {
+      position: relative;
+      width: min(28rem, 100%);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Rotating orbit ring */
+    .hero-logo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -0.5rem;
+      border-radius: 50%;
+      border: 1px dashed rgba(212, 175, 55, 0.25);
+      animation: orbit-spin 28s linear infinite;
+    }
+    .hero-logo-frame::after {
+      content: '';
+      position: absolute;
+      inset: -2.5rem;
+      border-radius: 50%;
+      border: 1px dashed rgba(212, 175, 55, 0.1);
+      animation: orbit-spin 45s linear infinite reverse;
+    }
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .hero-logo-inner {
+      width: 85%;
+      height: 85%;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 80px rgba(212, 175, 55, 0.12), inset 0 0 40px rgba(0,0,0,0.4);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-logo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 2rem;
+    }
+
+    /* Star SVG fallback (shown when image missing) */
+    .logo-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .logo-fallback svg {
+      width: 9rem;
+      height: 9rem;
+      filter: drop-shadow(0 0 18px rgba(212,175,55,0.5));
+      animation: pulse-glow 3.5s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 16px rgba(212,175,55,0.4)); }
+      50%       { filter: drop-shadow(0 0 32px rgba(212,175,55,0.75)); }
+    }
+    .logo-fallback-text {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      text-align: center;
+    }
+
+    /* Stat chips beneath hero logo */
+    .hero-stats {
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.75rem;
+      z-index: 2;
+    }
+    .stat-chip {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1.1rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .stat-chip strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--color-gold);
+    }
+    .stat-chip span {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-motto { border-left: none; border-top: 2px solid var(--color-gold-muted); padding: 1rem 0 0; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { margin-top: 3rem; }
+      .hero-eyebrow { margin-inline: auto; }
+      .hero-stats { position: static; transform: none; margin-top: 2rem; flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ============================================================
+       SECTION 2: ABOUT / IDENTITY
+    ============================================================ */
+    #about {
+      background: linear-gradient(180deg, var(--color-canvas) 0%, var(--color-surface) 50%, var(--color-canvas) 100%);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .mission-card,
+    .vision-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-card::before,
+    .vision-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-gold), transparent);
+    }
+
+    .card-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-md);
+      background: var(--color-gold-dim);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .card-icon svg { width: 1.4rem; height: 1.4rem; color: var(--color-gold); }
+
+    .card h3 { margin-bottom: 0.75rem; }
+    .card p  { font-size: 0.93rem; line-height: 1.75; color: var(--color-text-body); }
+
+    /* Values grid */
+    .values-section {
+      margin-top: 1.5rem;
+    }
+    .values-header {
+      margin-bottom: 2rem;
+    }
+    .values-header h3 {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--color-gold);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      gap: 1rem;
+    }
+
+    .value-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
+    }
+    .value-item:hover {
+      border-color: var(--color-border-hover);
+      background: var(--color-surface-2);
+      transform: translateY(-2px);
+    }
+
+    .value-num {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      opacity: 0.5;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .value-text h4 {
+      font-size: 0.85rem;
+      color: var(--color-text-primary);
+      margin-bottom: 0.3rem;
+    }
+    .value-text p {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .identity-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 3: LEADERSHIP DESK
+    ============================================================ */
+    #leadership {
+      background: var(--color-canvas);
+    }
+
+    .leadership-layout {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    .leadership-sidebar h2 {
+      margin-bottom: 1rem;
+    }
+    .leadership-sidebar p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+    }
+
+    .notes-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .note-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    .note-card:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-gold);
+    }
+    .note-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.75rem;
+      left: 1.25rem;
+      font-family: var(--font-serif);
+      font-size: 7rem;
+      line-height: 1;
+      color: var(--color-gold);
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .note-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      background: var(--color-gold-dim);
+      border: 1px solid var(--color-border);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1rem;
+    }
+
+    .note-card blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      font-style: italic;
+      color: var(--color-text-primary);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .note-attribution {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .attribution-avatar {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-gold-muted), var(--color-gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #0D0D0D;
+      flex-shrink: 0;
+    }
+    .attribution-name {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    .attribution-title {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.06em;
+    }
+    .note-date {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 860px) {
+      .leadership-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SECTION 4: GALLERY
+    ============================================================ */
+    #gallery {
+      background: linear-gradient(180deg, var(--color-canvas) 0%, var(--color-surface) 100%);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      position: relative;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      cursor: pointer;
+    }
+    .gallery-item:hover {
+      transform: scale(1.015);
+      box-shadow: var(--shadow-gold);
+      z-index: 2;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    /* Mosaic layout */
+    .gallery-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+    .gallery-item:nth-child(2) { grid-column: span 5; }
+    .gallery-item:nth-child(3) { grid-column: span 5; }
+    .gallery-item:nth-child(4) { grid-column: span 4; }
+    .gallery-item:nth-child(5) { grid-column: span 4; }
+    .gallery-item:nth-child(6) { grid-column: span 4; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 14rem;
+      transition: transform var(--transition-slow);
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+    }
+    .gallery-caption {
+      font-size: 0.78rem;
+      color: var(--color-text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    /* Placeholder images using SVG patterns */
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 14rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 860px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item { grid-column: span 1 !important; grid-row: span 1 !important; }
+    }
+    @media (max-width: 540px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #site-footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding-block: 4rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      margin-top: 1rem;
+      max-width: 28ch;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      transition: color var(--transition-base);
+    }
+    .footer-links a:hover { color: var(--color-text-primary); }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.7rem;
+    }
+    .footer-contact-item svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--color-gold);
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+    @media (max-width: 500px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* ============================================================
+       FLOATING QUICK-CONNECT PADS
+    ============================================================ */
+    #quick-connect {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-end;
+    }
+
+    .qc-pad {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid transparent;
+      box-shadow: var(--shadow-float);
+      transition: transform var(--transition-base), box-shadow var(--transition-base),
+                  background var(--transition-base), border-color var(--transition-base);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .qc-pad:hover  { transform: translateX(-4px) scale(1.03); }
+    .qc-pad svg    { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+    .qc-phone {
+      background: var(--color-surface);
+      border-color: var(--color-border);
+      color: var(--color-text-primary);
+    }
+    .qc-phone:hover {
+      background: var(--color-surface-3);
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .qc-email {
+      background: var(--color-surface);
+      border-color: var(--color-border);
+      color: var(--color-text-primary);
+    }
+    .qc-email:hover {
+      background: var(--color-surface-3);
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .qc-whatsapp {
+      background: #128C7E;
+      border-color: #25D366;
+      color: #fff;
+    }
+    .qc-whatsapp:hover {
+      background: #0f7265;
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Collapse to icons-only on very small screens */
+    @media (max-width: 480px) {
+      .qc-pad { padding: 0.75rem; gap: 0; }
+      .qc-label { display: none; }
+      .qc-pad svg { width: 1.2rem; height: 1.2rem; }
+    }
+
+    /* ============================================================
+       SCROLL-REVEAL ANIMATION
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contact {
+      background: var(--color-canvas);
+      padding-bottom: 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 0.75rem;
+    }
+    .contact-info p {
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      text-decoration: none;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+    }
+    .contact-method:hover {
+      border-color: var(--color-border-hover);
+      transform: translateX(4px);
+    }
+    .contact-method-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-md);
+      background: var(--color-gold-dim);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-method-icon svg { width: 1.1rem; height: 1.1rem; color: var(--color-gold); }
+    .contact-method-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 0.1rem; }
+    .contact-method-value { font-size: 0.9rem; color: var(--color-text-primary); }
+
+    .contact-form-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .form-field label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--color-text-primary);
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+      outline: none;
+      width: 100%;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--color-gold-muted);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+    }
+    .form-field textarea { resize: vertical; min-height: 7rem; }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: var(--color-text-muted); }
+    .form-field select { appearance: none; cursor: pointer; }
+    .form-field select option { background: var(--color-surface); }
+
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row     { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       MISC: Section separator
+    ============================================================ */
+    .sep {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+      margin-inline: auto;
+      max-width: 80%;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       STICKY HEADER NAVIGATION
+  ============================================================ -->
+  <header id="site-header" role="banner">
+    <div class="container nav-inner">
+
+      <!-- Brand Mark -->
+      <a href="#hero" class="brand" aria-label="Starlets Empowerment Network CBO — home">
+        <svg class="brand-emblem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="24" r="23" stroke="#D4AF37" stroke-width="1.2" opacity="0.4"/>
+          <polygon points="24,6 27.5,17.5 39.5,17.5 29.8,24.5 33.3,36 24,29 14.7,36 18.2,24.5 8.5,17.5 20.5,17.5" fill="#D4AF37"/>
+          <circle cx="24" cy="38" r="2.5" fill="#D4AF37" opacity="0.6"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Starlets</span>
+          <span class="brand-sub">Empowerment Network CBO</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="#hero"       class="nav-link">Home</a></li>
+          <li><a href="#about"      class="nav-link">About</a></li>
+          <li><a href="#leadership" class="nav-link">Notes</a></li>
+          <li><a href="#gallery"    class="nav-link">Media</a></li>
+          <li><a href="#contact"    class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Toggle -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-mobile">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Mobile navigation">
+    <a href="#hero"       class="nav-link" onclick="closeNav()">Home</a>
+    <a href="#about"      class="nav-link" onclick="closeNav()">About</a>
+    <a href="#leadership" class="nav-link" onclick="closeNav()">Notes</a>
+    <a href="#gallery"    class="nav-link" onclick="closeNav()">Media</a>
+    <a href="#contact"    class="nav-link" onclick="closeNav()">Contact</a>
+  </nav>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content">
+
+    <!-- =========================================================
+         SECTION 1: HERO
+    ========================================================= -->
+    <section id="hero" class="section" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Left: Copy & CTA -->
+          <div class="hero-copy">
+            <span class="hero-eyebrow reveal">
+              <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><polygon points="6,0 7.5,4.5 12,4.5 8.5,7.2 9.8,12 6,9.2 2.2,12 3.5,7.2 0,4.5 4.5,4.5"/></svg>
+              Community Based Organisation
+            </span>
+            <h1 id="hero-heading" class="hero-title reveal reveal-delay-1">
+              Starlets<br>
+              <span class="org-name">Empowerment</span>
+              Network
+            </h1>
+            <p class="hero-motto reveal reveal-delay-2">
+              "Empowering All, Transforming Lives."
+            </p>
+            <p class="reveal reveal-delay-3" style="font-size:0.95rem; color:var(--color-text-muted); max-width:42ch; margin-bottom:0;">
+              A grassroots CBO rooted in community values — building bridges of opportunity, equity, and sustainable development for every individual we serve.
+            </p>
+            <div class="hero-actions reveal reveal-delay-4">
+              <a href="#about"   class="btn btn-primary" aria-label="Learn about our mission and values">Our Mission</a>
+              <a href="#contact" class="btn btn-outline"  aria-label="Get in touch with Starlets Empowerment Network">Get Involved</a>
+            </div>
+          </div>
+
+          <!-- Right: Logo Visual -->
+          <div class="hero-visual reveal reveal-delay-2">
+            <div class="hero-logo-frame">
+              <div class="hero-logo-inner">
+                <!-- Replace src with the actual logo: 18110_3.jpg -->
+                <img
+                  src="18110_3.jpg"
+                  alt="Starlets Empowerment Network CBO official logo — a golden star emblem"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <!-- SVG Fallback shown only when image not found -->
+                <div class="logo-fallback" style="display:none;" aria-hidden="true">
+                  <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="58" stroke="#D4AF37" stroke-width="1.5" opacity="0.3"/>
+                    <circle cx="60" cy="60" r="45" stroke="#D4AF37" stroke-width="0.8" opacity="0.2"/>
+                    <polygon points="60,10 68,38 98,38 74,55 83,83 60,66 37,83 46,55 22,38 52,38" fill="#D4AF37" stroke="#AA7C11" stroke-width="1"/>
+                    <circle cx="60" cy="100" r="5" fill="#D4AF37" opacity="0.5"/>
+                    <circle cx="42" cy="95" r="3" fill="#D4AF37" opacity="0.3"/>
+                    <circle cx="78" cy="95" r="3" fill="#D4AF37" opacity="0.3"/>
+                  </svg>
+                  <p class="logo-fallback-text">Starlets<br>Empowerment Network</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stat chips -->
+            <div class="hero-stats" role="list" aria-label="Organisation highlights">
+              <div class="stat-chip" role="listitem">
+                <strong>CBO</strong>
+                <span>Registered</span>
+              </div>
+              <div class="stat-chip" role="listitem">
+                <strong>100%</strong>
+                <span>Community Driven</span>
+              </div>
+              <div class="stat-chip" role="listitem">
+                <strong>7</strong>
+                <span>Core Values</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <!-- =========================================================
+         SECTION 2: IDENTITY MATRICES
+    ========================================================= -->
+    <section id="about" class="section" aria-labelledby="about-heading">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <p class="section-label">Who We Are</p>
+          <h2 id="about-heading">Our Identity &amp; <span class="text-gold">Purpose</span></h2>
+          <div class="gold-divider" aria-hidden="true"></div>
+        </div>
+
+        <!-- Mission & Vision cards -->
+        <div class="identity-grid">
+          <article class="card mission-card reveal reveal-delay-1" aria-labelledby="mission-heading">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 id="mission-heading" class="text-gold">Our Mission</h3>
+            <p>To foster an inclusive environment where every community member — regardless of background, gender, or circumstance — can access the tools, networks, and support needed to realise their full potential and contribute meaningfully to a thriving society.</p>
+          </article>
+
+          <article class="card vision-card reveal reveal-delay-2" aria-labelledby="vision-heading">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v2M12 16v2M6 12H4M20 12h-2"/></svg>
+            </div>
+            <h3 id="vision-heading" class="text-gold">Our Vision</h3>
+            <p>A self-reliant, just, and compassionate Kenya where communities lead their own development agendas — where every star shines at its brightest, and no individual is left without a voice, an opportunity, or a path to dignity.</p>
+          </article>
+        </div>
+
+        <!-- 7 Core Values -->
+        <div class="values-section">
+          <div class="values-header reveal">
+            <p class="section-label">The Pillars We Stand On</p>
+            <h3>Seven Core Values</h3>
+          </div>
+
+          <ol class="values-grid" aria-label="Seven core values of Starlets Empowerment Network CBO">
+
+            <li class="value-item reveal reveal-delay-1">
+              <span class="value-num" aria-hidden="true">01</span>
+              <div class="value-text">
+                <h4>Integrity</h4>
+                <p>We hold ourselves to the highest standards of transparency, accountability, and ethical conduct in all operations.</p>
+              </div>
+            </li>
+
+            <li class="value-item reveal reveal-delay-2">
+              <span class="value-num" aria-hidden="true">02</span>
+              <div class="value-text">
+                <h4>Ubuntu</h4>
+                <p>"I am because we are." Our work is grounded in African humanist philosophy — collective dignity, shared humanity.</p>
+              </div>
+            </li>
+
+            <li class="value-item reveal reveal-delay-3">
+              <span class="value-num" aria-hidden="true">03</span>
+              <div class="value-text">
+                <h4>Inclusivity</h4>
+                <p>We celebrate diversity and ensure every programme, space, and opportunity is accessible to all — no exceptions.</p>
+              </div>
+            </li>
+
+            <li class="value-item reveal reveal-delay-1">
+              <span class="value-num" aria-hidden="true">04</span>
+              <div class="value-text">
+                <h4>Sustainability</h4>
+                <p>Our initiatives are designed for lasting impact — environmentally conscious, financially prudent, and socially rooted.</p>
+              </div>
+            </li>
+
+            <li class="value-item reveal reveal-delay-2">
+              <span class="value-num" aria-hidden="true">05</span>
+              <div class="value-text">
+                <h4>Empowerment</h4>
+                <p>We transfer knowledge, resources, and agency to community members — building capacity from within, not dependency.</p>
+              </div>
+            </li>
+
+            <li class="value-item reveal reveal-delay-3">
+              <span class="value-num" aria-hidden="true">06</span>
+              <div class="value-text">
+                <h4>Collaboration</h4>
+                <p>Partnerships amplify impact. We work alongside government, civil society, businesses, and the people we serve.</p>
+              </div>
+            </li>
+
+            <li class="value-item reveal reveal-delay-4">
+              <span class="value-num" aria-hidden="true">07</span>
+              <div class="value-text">
+                <h4>Community Engagement</h4>
+                <p>The community is both the author and beneficiary of change. Active, meaningful participation guides every decision.</p>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <!-- =========================================================
+         SECTION 3: LEADERSHIP DESK
+    ========================================================= -->
+    <section id="leadership" class="section" aria-labelledby="leadership-heading">
+      <div class="container">
+
+        <div class="leadership-layout">
+
+          <!-- Sidebar -->
+          <div class="leadership-sidebar">
+            <div class="reveal">
+              <p class="section-label">From the Desk</p>
+              <h2 id="leadership-heading">Leadership<br><span class="text-gold">Notes</span></h2>
+              <div class="gold-divider" aria-hidden="true"></div>
+            </div>
+            <p class="reveal reveal-delay-1" style="margin-top:1.5rem;">
+              Strategic messages, field guidelines, and public communications from the organisational leadership of Starlets Empowerment Network CBO.
+            </p>
+            <p class="reveal reveal-delay-2" style="margin-top:1rem;">
+              These notes reflect our active programmes, community updates, and the strategic direction driving sustainable transformation.
+            </p>
+          </div>
+
+          <!-- Notes Stack -->
+          <div class="notes-stack">
+
+            <article class="note-card reveal" aria-labelledby="note1-heading">
+              <span class="note-tag" aria-label="Note category">Strategic Direction</span>
+              <blockquote aria-label="Message from leadership">
+                <p>The road to community transformation is not walked alone — it is built together, one partnership, one focus group, one empowered individual at a time. This year, we deepen our roots in the places that need us most, and we do so with courage, clarity, and conviction.</p>
+              </blockquote>
+              <footer class="note-attribution">
+                <div class="attribution-avatar" aria-hidden="true">SEN</div>
+                <div>
+                  <p class="attribution-name">Executive Director</p>
+                  <p class="attribution-title">Starlets Empowerment Network CBO</p>
+                </div>
+                <time class="note-date" datetime="2025-01">January 2025</time>
+              </footer>
+            </article>
+
+            <article class="note-card reveal reveal-delay-1" aria-labelledby="note2-heading">
+              <span class="note-tag" aria-label="Note category">Field Guidelines</span>
+              <blockquote aria-label="Field operations message">
+                <p>All field teams are reminded that community voices are data. Our focus groups, advocacy sessions, and workshop feedback loops are not formalities — they are the compass that guides every intervention. Listen first. Act second. Document always.</p>
+              </blockquote>
+              <footer class="note-attribution">
+                <div class="attribution-avatar" aria-hidden="true">PM</div>
+                <div>
+                  <p class="attribution-name">Programmes Manager</p>
+                  <p class="attribution-title">Field Operations Division</p>
+                </div>
+                <time class="note-date" datetime="2025-03">March 2025</time>
+              </footer>
+            </article>
+
+            <article class="note-card reveal reveal-delay-2" aria-labelledby="note3-heading">
+              <span class="note-tag" aria-label="Note category">Public Message</span>
+              <blockquote aria-label="Public message from leadership">
+                <p>To every partner organisation, donor, volunteer, and community champion: your contribution — however small it may seem to you — has real, measurable impact in the lives of the people we serve. We see you. We honour you. We are grateful for you.</p>
+              </blockquote>
+              <footer class="note-attribution">
+                <div class="attribution-avatar" aria-hidden="true">BD</div>
+                <div>
+                  <p class="attribution-name">Board of Directors</p>
+                  <p class="attribution-title">Starlets Empowerment Network CBO</p>
+                </div>
+                <time class="note-date" datetime="2024-12">Dec 2024</time>
+              </footer>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <!-- =========================================================
+         SECTION 4: VISUAL MEDIA HUB
+    ========================================================= -->
+    <section id="gallery" class="section" aria-labelledby="gallery-heading">
+      <div class="container">
+
+        <div class="section-heading text-center reveal">
+          <p class="section-label" style="justify-content:center;">Our Work in Action</p>
+          <h2 id="gallery-heading">Visual <span class="text-gold">Media Hub</span></h2>
+          <p style="max-width:50ch; margin-inline:auto; margin-top:0.75rem; font-size:0.93rem; color:var(--color-text-muted);">
+            Images from our focus groups, active workshops, and field advocacy operations across the communities we serve.
+          </p>
+          <div class="gold-divider" style="margin-inline:auto; margin-top:1rem;" aria-hidden="true"></div>
+        </div>
+
+        <!-- Responsive Gallery Grid -->
+        <div class="gallery-grid" role="list" aria-label="Gallery of Starlets Empowerment Network CBO activities">
+
+          <!-- Item 1 (large, 7 cols, 2 rows) -->
+          <figure class="gallery-item reveal" role="listitem">
+            <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
+              <!-- Replace with: <img src="your-image.jpg" alt="..."> -->
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.07;" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g1" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="#D4AF37"/></pattern></defs><rect width="100%" height="100%" fill="url(#g1)"/></svg>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;z-index:1;">
+                <svg width="3rem" height="3rem" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#D4AF37" stroke-width="1" opacity="0.4"/><polygon points="24,8 27,19 38,19 30,26 33,37 24,30 15,37 18,26 10,19 21,19" fill="#D4AF37" opacity="0.6"/></svg>
+                <span style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);">Community Focus Group</span>
+              </div>
+            </div>
+            <div class="gallery-overlay" aria-hidden="true">
+              <p class="gallery-caption">Community Focus Group Session — Nairobi</p>
+            </div>
+            <figcaption class="sr-only">Community Focus Group Session — Nairobi</figcaption>
+          </figure>
+
+          <!-- Item 2 -->
+          <figure class="gallery-item reveal reveal-delay-1" role="listitem">
+            <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1e1a12 0%, #2a2010 100%);">
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.07;" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g2" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M0 15 L30 15 M15 0 L15 30" stroke="#D4AF37" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g2)"/></svg>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;z-index:1;">
+                <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2" opacity="0.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+                <span style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);">Skills Workshop</span>
+              </div>
+            </div>
+            <div class="gallery-overlay" aria-hidden="true">
+              <p class="gallery-caption">Vocational Skills Training Workshop</p>
+            </div>
+            <figcaption class="sr-only">Vocational Skills Training Workshop</figcaption>
+          </figure>
+
+          <!-- Item 3 -->
+          <figure class="gallery-item reveal reveal-delay-2" role="listitem">
+            <div class="gallery-placeholder" style="background: linear-gradient(135deg, #121a1e 0%, #102028 100%);">
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.07;" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g3" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="6" stroke="#D4AF37" stroke-width="0.5" fill="none"/></pattern></defs><rect width="100%" height="100%" fill="url(#g3)"/></svg>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;z-index:1;">
+                <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2" opacity="0.6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);">Advocacy Group</span>
+              </div>
+            </div>
+            <div class="gallery-overlay" aria-hidden="true">
+              <p class="gallery-caption">Community Advocacy Campaign</p>
+            </div>
+            <figcaption class="sr-only">Community Advocacy Campaign</figcaption>
+          </figure>
+
+          <!-- Item 4 -->
+          <figure class="gallery-item reveal reveal-delay-1" role="listitem">
+            <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a120e 0%, #28180a 100%);">
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.07;" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g4" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><polygon points="12.5,2 15.5,10 24,10 17.5,14.5 20,22 12.5,17.5 5,22 7.5,14.5 1,10 9.5,10" stroke="#D4AF37" stroke-width="0.5" fill="none"/></pattern></defs><rect width="100%" height="100%" fill="url(#g4)"/></svg>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;z-index:1;">
+                <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2" opacity="0.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);">Field Operations</span>
+              </div>
+            </div>
+            <div class="gallery-overlay" aria-hidden="true">
+              <p class="gallery-caption">Field Outreach & Community Operations</p>
+            </div>
+            <figcaption class="sr-only">Field Outreach and Community Operations</figcaption>
+          </figure>
+
+          <!-- Item 5 -->
+          <figure class="gallery-item reveal reveal-delay-2" role="listitem">
+            <div class="gallery-placeholder" style="background: linear-gradient(135deg, #0e1a12 0%, #0a2218 100%);">
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.07;" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g5" x="0" y="0" width="35" height="35" patternUnits="userSpaceOnUse"><line x1="0" y1="35" x2="35" y2="0" stroke="#D4AF37" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g5)"/></svg>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;z-index:1;">
+                <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2" opacity="0.6"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                <span style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);">Training Programme</span>
+              </div>
+            </div>
+            <div class="gallery-overlay" aria-hidden="true">
+              <p class="gallery-caption">Capacity Building Training Programme</p>
+            </div>
+            <figcaption class="sr-only">Capacity Building Training Programme</figcaption>
+          </figure>
+
+          <!-- Item 6 -->
+          <figure class="gallery-item reveal reveal-delay-3" role="listitem">
+            <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a1218 0%, #220e1a 100%);">
+              <svg width="100%" height="100%" style="position:absolute;inset:0;opacity:0.07;" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g6" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><rect x="10" y="10" width="30" height="30" stroke="#D4AF37" stroke-width="0.5" fill="none"/></pattern></defs><rect width="100%" height="100%" fill="url(#g6)"/></svg>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;z-index:1;">
+                <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2" opacity="0.6"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                <span style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);">Community Event</span>
+              </div>
+            </div>
+            <div class="gallery-overlay" aria-hidden="true">
+              <p class="gallery-caption">Community Celebration & Partnership Event</p>
+            </div>
+            <figcaption class="sr-only">Community Celebration and Partnership Event</figcaption>
+          </figure>
+
+        </div><!-- /.gallery-grid -->
+
+        <p class="text-center reveal" style="margin-top:2.5rem; font-size:0.82rem; color:var(--color-text-muted); letter-spacing:0.05em;">
+          Replace gallery placeholder items with actual activity photos by updating the <code style="color:var(--color-gold);background:var(--color-gold-dim);padding:0.15rem 0.4rem;border-radius:0.25rem;">src</code> attributes or inserting <code style="color:var(--color-gold);background:var(--color-gold-dim);padding:0.15rem 0.4rem;border-radius:0.25rem;">&lt;img&gt;</code> tags inside each <code style="color:var(--color-gold);background:var(--color-gold-dim);padding:0.15rem 0.4rem;border-radius:0.25rem;">.gallery-placeholder</code> wrapper.
+        </p>
+
+      </div>
+    </section>
+
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <!-- =========================================================
+         CONTACT SECTION
+    ========================================================= -->
+    <section id="contact" class="section" aria-labelledby="contact-heading">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <p class="section-label">Reach Out</p>
+          <h2 id="contact-heading">Get in <span class="text-gold">Touch</span></h2>
+          <div class="gold-divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- Info Column -->
+          <div class="contact-info">
+            <h3 class="reveal">Let's Build Together</h3>
+            <p class="reveal reveal-delay-1">
+              Whether you're a partner organisation, volunteer, donor, community member, or simply someone who believes in our mission — we want to hear from you. Every conversation matters.
+            </p>
+
+            <div class="contact-methods" role="list" aria-label="Contact methods">
+
+              <a href="tel:+254XXXXXXXXX"
+                 class="contact-method reveal reveal-delay-1"
+                 role="listitem"
+                 aria-label="Call us at +254 XXX XXX XXX">
+                <div class="contact-method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.22z"/></svg>
+                </div>
+                <div>
+                  <p class="contact-method-label">Phone</p>
+                  <p class="contact-method-value">+254 XXX XXX XXX</p>
+                </div>
+              </a>
+
+              <a href="mailto:info@starletsempowerment.org"
+                 class="contact-method reveal reveal-delay-2"
+                 role="listitem"
+                 aria-label="Email us at info@starletsempowerment.org">
+                <div class="contact-method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <p class="contact-method-label">Email</p>
+                  <p class="contact-method-value">info@starletsempowerment.org</p>
+                </div>
+              </a>
+
+              <a href="https://wa.me/254XXXXXXXXX?text=Hello%20Starlets%20Empowerment%20Network%20CBO%2C%20I%20would%20like%20to%20get%20in%20touch%20regarding%20your%20programmes."
+                 class="contact-method reveal reveal-delay-3"
+                 role="listitem"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Message us on WhatsApp — opens in a new tab">
+                <div class="contact-method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </div>
+                <div>
+                  <p class="contact-method-label">WhatsApp</p>
+                  <p class="contact-method-value">Message us directly</p>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-panel reveal reveal-delay-1">
+            <h3 style="margin-bottom:1.5rem;">Send a Message</h3>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="Your full name" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" name="email" placeholder="your@email.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-subject">Subject</label>
+              <select id="contact-subject" name="subject" aria-label="Select the subject of your message">
+                <option value="" disabled selected>Select a subject…</option>
+                <option value="partnership">Partnership Inquiry</option>
+                <option value="volunteer">Volunteer Application</option>
+                <option value="donation">Donation / Funding</option>
+                <option value="programme">Programme Information</option>
+                <option value="media">Media & Press</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" placeholder="Write your message here…" required></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary" style="width:100%; justify-content:center;"
+                    aria-label="Submit contact form"
+                    onclick="handleFormSubmit(this)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Message
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       SITE FOOTER
+  ============================================================ -->
+  <footer id="site-footer" role="contentinfo">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="#hero" class="brand" aria-label="Starlets Empowerment Network CBO — back to top">
+            <svg width="2.4rem" height="2.4rem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="24" r="23" stroke="#D4AF37" stroke-width="1.2" opacity="0.4"/>
+              <polygon points="24,6 27.5,17.5 39.5,17.5 29.8,24.5 33.3,36 24,29 14.7,36 18.2,24.5 8.5,17.5 20.5,17.5" fill="#D4AF37"/>
+            </svg>
+            <span class="brand-text">
+              <span class="brand-name">Starlets Empowerment Network</span>
+              <span class="brand-sub">Community Based Organisation</span>
+            </span>
+          </a>
+          <p>A grassroots CBO empowering communities through advocacy, skills development, and inclusive engagement across Kenya.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <nav aria-label="Footer quick links">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#leadership">Leadership Notes</a></li>
+            <li><a href="#gallery">Media Hub</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Contact -->
+        <address>
+          <h4>Contact Us</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.22z"/></svg>
+            <span>+254 XXX XXX XXX</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:info@starletsempowerment.org" style="color:inherit; transition:color var(--transition-base);" onmouseover="this.style.color='var(--color-text-primary)'" onmouseout="this.style.color='inherit'">info@starletsempowerment.org</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Kenya</span>
+          </div>
+        </address>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="footer-year"></span> Starlets Empowerment Network CBO. All rights reserved.</p>
+        <p style="font-size:0.72rem; color:var(--color-text-muted);">Registered Community Based Organisation · Kenya</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       FLOATING QUICK-CONNECT PADS
+  ============================================================ -->
+  <aside id="quick-connect" aria-label="Quick contact options">
+
+    <a href="tel:+254XXXXXXXXX"
+       class="qc-pad qc-phone"
+       aria-label="Call Starlets Empowerment Network CBO directly at +254 XXX XXX XXX">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.22z"/>
+      </svg>
+      <span class="qc-label">Call Us</span>
+    </a>
+
+    <a href="mailto:info@starletsempowerment.org"
+       class="qc-pad qc-email"
+       aria-label="Email Starlets Empowerment Network CBO at info@starletsempowerment.org">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      <span class="qc-label">Email Us</span>
+    </a>
+
+    <a href="https://wa.me/254XXXXXXXXX?text=Hello%20Starlets%20Empowerment%20Network%20CBO%2C%20I%20would%20like%20to%20get%20in%20touch%20regarding%20your%20programmes."
+       class="qc-pad qc-whatsapp"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat with Starlets Empowerment Network CBO on WhatsApp — opens in a new tab">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span class="qc-label">WhatsApp</span>
+    </a>
+
+  </aside>
+
+  <!-- Screen-reader-only utility class -->
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+
+  <!-- ============================================================
+       JAVASCRIPT — single, non-duplicated script block
+  ============================================================ -->
+  <script>
+    /* ── Footer Year ── */
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    /* ── Sticky Header scroll class ── */
+    (function () {
+      const header = document.getElementById('site-header');
+      const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 30);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ── Mobile Nav Toggle ── */
+    (function () {
+      const toggle  = document.getElementById('nav-toggle');
+      const drawer  = document.getElementById('nav-mobile');
+      const spans   = toggle.querySelectorAll('span');
+
+      toggle.addEventListener('click', () => {
+        const open = drawer.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+        // Animate hamburger → ✕
+        if (open) {
+          spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+          spans[1].style.opacity   = '0';
+          spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+        } else {
+          spans[0].style.transform = '';
+          spans[1].style.opacity   = '';
+          spans[2].style.transform = '';
+        }
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!toggle.contains(e.target) && !drawer.contains(e.target)) {
+          closeNav();
+        }
+      });
+    })();
+
+    function closeNav() {
+      const drawer = document.getElementById('nav-mobile');
+      const toggle = document.getElementById('nav-toggle');
+      const spans  = toggle.querySelectorAll('span');
+      drawer.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      spans[0].style.transform = '';
+      spans[1].style.opacity   = '';
+      spans[2].style.transform = '';
+    }
+
+    /* ── Scroll Reveal (IntersectionObserver) ── */
+    (function () {
+      const targets = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('visible'));
+        return;
+      }
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(el => obs.observe(el));
+    })();
+
+    /* ── Contact Form Submit (demo handler) ── */
+    function handleFormSubmit(btn) {
+      const name    = document.getElementById('contact-name').value.trim();
+      const email   = document.getElementById('contact-email').value.trim();
+      const subject = document.getElementById('contact-subject').value;
+      const message = document.getElementById('contact-message').value.trim();
+
+      if (!name || !email || !subject || !message) {
+        btn.textContent = 'Please fill all fields';
+        btn.style.background = '#8B2020';
+        btn.style.borderColor = '#8B2020';
+        setTimeout(() => {
+          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+          btn.style.background = '';
+          btn.style.borderColor = '';
+        }, 2500);
+        return;
+      }
+
+      btn.innerHTML = '✓ Message Sent!';
+      btn.style.background = '#1A6E3D';
+      btn.style.borderColor = '#1A6E3D';
+      btn.disabled = true;
+
+      // Wire up to your backend/form endpoint here
+      setTimeout(() => {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.disabled = false;
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
